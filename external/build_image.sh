@@ -64,7 +64,7 @@ function build_image() {
     # Used for tagging the image
     tags="adoptopenjdk-${test}-test:${version}-${package}-${os}-${vm}-${build}"
 	if [[ "$test" == *"criu"* || "$test" == *"tck"* ]]; then
-		container_build="sudo -E XDG_RUNTIME_DIR= podman build"
+		container_build="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman build"
 	fi
 
 	echo "#####################################################"
