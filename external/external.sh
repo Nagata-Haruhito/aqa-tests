@@ -99,17 +99,17 @@ parseCommandLineArgs() {
 				fi
 
 				if [[ "${test}" == *"criu"* || "${test}" == *"tck"* ]]; then
-					container_run="sudo -E XDG_RUNTIME_DIR= podman run"
-					container_login="sudo -E XDG_RUNTIME_DIR= podman login"
-					container_inspect="sudo -E XDG_RUNTIME_DIR= podman inspect"
-					container_cp="sudo -E XDG_RUNTIME_DIR= podman cp"
-					container_commit="sudo -E XDG_RUNTIME_DIR= podman commit"
-					container_tag="sudo -E XDG_RUNTIME_DIR= podman tag"
-					container_logout="sudo -E XDG_RUNTIME_DIR= podman logout"
-					container_push="sudo -E XDG_RUNTIME_DIR= podman push"
-					container_pull="sudo -E XDG_RUNTIME_DIR= podman pull"
-					container_rm="sudo -E XDG_RUNTIME_DIR= podman rm"
-					container_rmi="sudo -E XDG_RUNTIME_DIR= podman rmi"
+					container_run="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman run"
+					container_login="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman login"
+					container_inspect="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman inspect"
+					container_cp="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman cp"
+					container_commit="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman commit"
+					container_tag="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman tag"
+					container_logout="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman logout"
+					container_push="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman push"
+					container_pull="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman pull"
+					container_rm="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman rm"
+					container_rmi="sudo -E XDG_RUNTIME_DIR= DBUS_SESSION_BUS_ADDRESS= podman rmi"
 				fi
 				shift;;
 
