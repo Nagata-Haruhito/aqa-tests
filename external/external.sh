@@ -99,17 +99,17 @@ parseCommandLineArgs() {
 				fi
 
 				if [[ "${test}" == *"criu"* || "${test}" == *"tck"* ]]; then
-					container_run="sudo podman run"
-					container_login="sudo podman login"
-					container_inspect="sudo podman inspect"
-					container_cp="sudo podman cp"
-					container_commit="sudo podman commit"
-					container_tag="sudo podman tag"
-					container_logout="sudo podman logout"
-					container_push="sudo podman push"
-					container_pull="sudo podman pull"
-					container_rm="sudo podman rm"
-					container_rmi="sudo podman rmi"
+					container_run="sudo -E podman run"
+					container_login="sudo -E podman login"
+					container_inspect="sudo -E podman inspect"
+					container_cp="sudo -E podman cp"
+					container_commit="sudo -E podman commit"
+					container_tag="sudo -E podman tag"
+					container_logout="sudo -E podman logout"
+					container_push="sudo -E podman push"
+					container_pull="sudo -E podman pull"
+					container_rm="sudo -E podman rm"
+					container_rmi="sudo -E podman rmi"
 				fi
 				shift;;
 
