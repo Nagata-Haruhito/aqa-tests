@@ -517,9 +517,9 @@ print_clone_project() {
 
     # Cause Test name to be capitalized
     test_tag="$(sanitize_test_names ${test} | tr a-z A-Z)_TAG"
-    if [[ "$test_tag" != *"CRIU"* && "$test_tag" != *"TCK"* ]]; then
-        aqa_tests_branch=$test_tag
-    fi
+    # if [[ "$test_tag" != *"CRIU"* && "$test_tag" != *"TCK"* ]]; then
+    #     aqa_tests_branch=$test_tag
+    # fi
 
     # Get Github folder name
     folder="$(echo ${aqa_tests_repo} | awk -F'/' '{print $NF}' | sed 's/.git//g')"
