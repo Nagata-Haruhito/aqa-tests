@@ -55,7 +55,7 @@ docker_args=""
 mountV=""
 mount_jdk="true"
 imageArg=""
-
+proxy_opt="-e http_proxy=http://jdkmachine:1111111111@nmb.proxy.nic.fujitsu.com:8080 https_proxy=http://jdkmachine:1111111111@nmb.proxy.nic.fujitsu.com:8080"
 
 usage () {
 	echo 'Usage : external.sh  --dir TESTDIR --tag DOCKERIMAGE_TAG --version JDK_VERSION --impl JDK_IMPL [--docker_os docker_os][--platform PLATFORM] [--portable portable] [--node_name node_name] [--node_labels node_labels] [--docker_registry_required docker_registry_required] [--docker_registry_url DOCKER_REGISTRY_URL] [--docker_registry_dir DOCKER_REGISTRY_DIR] [--base_docker_registry_url baseDockerRegistryUrl] [--base_docker_registry_dir baseDockerRegistryDir] [--mount_jdk mount_jdk] [--test_root TEST_ROOT] [--reportsrc appReportDir] [--reportdst REPORTDIR] [--testtarget target] [--docker_args EXTRA_DOCKER_ARGS] [--build|--run|--load|--clean]'
@@ -330,11 +330,11 @@ if [ $command_type == "run" ]; then
 	fi
 
 	if [[ $reportsrc != "false" ]] || [[ $portable != "false" ]]; then
-		echo "$container_run --privileged $mountV --name $test-test adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type $testtarget"
+		echo "$container_run $proxy_opt --privileged $mountV --name $test-test adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type $testtarget"
 		if [ -n "$testtarget" ]; then
-			$container_run --privileged $mountV --name $test-test adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type "$testtarget";
+			$container_run $proxy_opt --privileged $mountV --name $test-test adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type "$testtarget";
 		else
-			$container_run --privileged $mountV --name $test-test adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type;
+			$container_run $proxy_opt --privileged $mountV --name $test-test adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type;
 		fi
 		if [ $reportsrc != "false" ]; then
 			$container_cp $test-test:$reportsrc $reportdst/external_test_reports;
@@ -360,11 +360,11 @@ if [ $command_type == "run" ]; then
 			fi
 		fi
 	else
-		echo "$container_run --privileged $mountV --name $test-test --rm adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type $testtarget"
+		echo "$container_run $proxy_opt --privileged $mountV --name $test-test --rm adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type $testtarget"
 		if [ -n "$testtarget" ]; then
-			$container_run --privileged $mountV --name $test-test --rm adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type "$testtarget";
+			$container_run $proxy_opt --privileged $mountV --name $test-test --rm adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type "$testtarget";
 		else
-			$container_run --privileged $mountV --name $test-test --rm adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type;
+			$container_run $proxy_opt --privileged $mountV --name $test-test --rm adoptopenjdk-$test-test:${JDK_VERSION}-$package-$docker_os-${JDK_IMPL}-$build_type;
 		fi
 	fi
 fi
@@ -409,8 +409,8 @@ if [ $command_type == "load" ]; then
 				echo "Pulling image $restore_docker_image_name"
 				$container_pull $restore_docker_image_name
 				# restore
-				echo "$container_run --privileged $mount_options --name restore-test --rm $restore_docker_image_name"
-				$container_run --privileged $mount_options --name restore-test --rm $restore_docker_image_name
+				echo "$container_run $proxy_opt --privileged $mount_options --name restore-test --rm $restore_docker_image_name"
+				$container_run $proxy_opt --privileged $mount_options --name restore-test --rm $restore_docker_image_name
 			done
 
 			$container_logout $docker_registry_url
@@ -431,8 +431,8 @@ if [ $command_type == "load" ]; then
 			echo "Mounting JDK and test script"
 			mount_options="$mountV $mount_test_script"
 		fi
-		echo "$container_run --privileged $mount_options --name restore-test --rm $docker_image_name bash /test.sh"
-		$container_run --privileged $mount_options --name restore-test --rm $docker_image_name bash /test.sh
+		echo "$container_run $proxy_opt --privileged $mount_options --name restore-test --rm $docker_image_name bash /test.sh"
+		$container_run $proxy_opt --privileged $mount_options --name restore-test --rm $docker_image_name bash /test.sh
 	fi
 fi
 
