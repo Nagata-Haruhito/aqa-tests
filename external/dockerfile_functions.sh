@@ -560,6 +560,22 @@ print_cmd() {
     echo -e "\nCMD [\"${cmd}\"]" >> ${file}
 }
 
+print_gradlew_proxy() {
+    local file=$1
+    local test=$2
+    local proxy_set=$3
+
+    echo -e "\nRUN cat ${test}/${proxy_set} >> `find . -name gradle-wrapper.properties`" >> ${file}
+}
+
+print_mvnw_proxy() {
+    local file=$1
+    local test=$2
+    local proxy_set=$3
+
+    echo -e "\nRUN cat ${test}/${proxy_set} >> `find . -name jvm.config`" >> ${file}
+}
+
 remove_trailing_spaces() {
     local file=$1
 
@@ -660,6 +676,13 @@ generate_dockerfile() {
     print_testInfo_env ${test} ${tag_version} ${os} ${version} ${vm}
     print_clone_project ${file} ${test} ${github_url};
     print_test_files ${file} ${test} ${localPropertyFile};
+
+    if [[ ! -z ${mvnw_proxy} ]]; then
+        print_mvnw_proxy ${file} ${test} ${mvnw_proxy};
+    fi
+    if [[ ! -z ${gradlew_proxy} ]]; then
+        print_gradlew_proxy ${file} ${test} ${gradlew_proxy};
+    fi
 
     if [[ "$check_external_custom_test" == "1" ]]; then
         print_external_custom_parameters ${file}
