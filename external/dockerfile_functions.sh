@@ -563,17 +563,19 @@ print_cmd() {
 print_gradlew_proxy() {
     local file=$1
     local test=$2
-    local proxy_set=$3
+    local proxy_set=${3%:*}
+    local proxy_file=${3#*:}
 
-    echo -e "\nRUN cat ${test}/${proxy_set} >> `find . -name gradle-wrapper.properties`" >> ${file}
+    echo -e "\nRUN cat ${test}/${proxy_set} >> ${proxy_file}" >> ${file}
 }
 
 print_mvnw_proxy() {
     local file=$1
     local test=$2
-    local proxy_set=$3
+    local proxy_set=${3%:*}
+    local proxy_file=${3#*:}
 
-    echo -e "\nRUN cat ${test}/${proxy_set} >> `find . -name jvm.config`" >> ${file}
+    echo -e "\nRUN cat ${test}/${proxy_set} >> ${proxy_file}" >> ${file}
 }
 
 remove_trailing_spaces() {
