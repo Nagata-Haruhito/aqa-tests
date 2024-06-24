@@ -206,6 +206,8 @@ function set_test_info() {
     localPropertyFile=$(getProperty "localPropertyFile")
     ubuntu_packages=$(getProperty "ubuntu_packages")
     ubi_packages=$(getProperty "ubi_packages")
+    gradlew_proxy=$(getProperty "gradlew_proxy")
+    mvnw_proxy=$(getProperty "mvnw_proxy")
 }
 
 function cleanup_images() {
