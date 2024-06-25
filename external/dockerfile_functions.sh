@@ -566,7 +566,8 @@ print_proxy() {
     local proxy_set=${3%:*}
     local proxy_file=${3#*:}
 
-    echo -e "\nRUN cat ${test}/${proxy_set} >> ${proxy_file}" >> ${file}
+    echo -e "\nCOPY ${test}/${proxy_set} ${proxy_set}" >> ${file}
+    echo -e "\nRUN cat ${proxy_set} >> ${proxy_file}" >> ${file}
 }
 
 remove_trailing_spaces() {
