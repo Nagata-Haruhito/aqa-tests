@@ -85,7 +85,7 @@
 
 	<target name="move_scripts" description="move shell scripts to working directory">
 		<copy todir="${DEST_EXTERNAL}/${TEST}">
-			<fileset dir="${src}/" includes="*.sh, *.properties"/>
+			<fileset dir="${src}/" includes="*.sh, *.properties, *_proxy"/>
 		</copy>
 		<copy todir="${DEST_EXTERNAL}">
 			<fileset dir="${top}" includes="*.sh"/>
