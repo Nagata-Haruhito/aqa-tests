@@ -1,0 +1,7 @@
+
+-Dhttp.proxyHost=yto.proxy.nic.fujitsu.com
+-Dhttp.proxyPort=8080
+-Dhttps.proxyHost=yto.proxy.nic.fujitsu.com
+-Dhttps.proxyPort=8080
+-Dhttp.proxyUser=jdkmachine
+-Dhttp.proxyPassword=1111111111
