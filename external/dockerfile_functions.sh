@@ -143,7 +143,7 @@ print_ubuntu_pkg() {
             "\n\t&& rm -rf /var/lib/apt/lists/*" \
             "\n" >> ${file}
     if [ "`echo $packages | grep 'ant'`" ]; then
-        echo -e "ENV ANT_OPTS=\\"-Dhttp.proxyHost=openjdk-webtest.soft.fujitsu.com -Dhttp.proxyPort=3128 -Dhttps.proxyHost=openjdk-webtest.soft.fujitsu.com -Dhttps.proxyPort=3128\\"\n" >> ${file}
+        echo -e "ENV ANT_OPTS=\"-Dhttp.proxyHost=openjdk-webtest.soft.fujitsu.com -Dhttp.proxyPort=3128 -Dhttps.proxyHost=openjdk-webtest.soft.fujitsu.com -Dhttps.proxyPort=3128\"\n" >> ${file}
     fi
 }
 
@@ -444,7 +444,7 @@ print_maven_install() {
             "\nENV PATH \${PATH}:\${MAVEN_HOME}/bin" \
             "\n" >> ${file}
 
-    echo -e "ENV MAVEN_OPTS=\\"-Dhttp.proxyHost=openjdk-webtest.soft.fujitsu.com -Dhttp.proxyPort=3128 -Dhttps.proxyHost=openjdk-webtest.soft.fujitsu.com -Dhttps.proxyPort=3128\\"\n" >> ${file}
+    echo -e "ENV MAVEN_OPTS=\"-Dhttp.proxyHost=openjdk-webtest.soft.fujitsu.com -Dhttp.proxyPort=3128 -Dhttps.proxyHost=openjdk-webtest.soft.fujitsu.com -Dhttps.proxyPort=3128\"\n" >> ${file}
 }
 # Prints Java Tool Options
 print_java_tool_options() {
