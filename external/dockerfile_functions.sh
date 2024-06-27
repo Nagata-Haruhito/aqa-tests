@@ -571,8 +571,12 @@ print_proxy() {
     local proxy_set=${3%:*}
     local proxy_file=${3#*:}
 
-    echo -e "\nCOPY ${test}/${proxy_set} ${proxy_set}" >> ${file}
-    echo -e "\nRUN cat ${proxy_set} >> ${proxy_file}" >> ${file}
+    if ["$proxy_set" = "gradlew_proxy"]; then
+        echo -e "ENV GRADLE_OPTS=\"-Dhttp.proxyHost=openjdk-webtest.soft.fujitsu.com -Dhttp.proxyPort=3128 -Dhttps.proxyHost=openjdk-webtest.soft.fujitsu.com -Dhttps.proxyPort=3128\"\n" >> ${file}
+    else
+        echo -e "\nCOPY ${test}/${proxy_set} ${proxy_set}" >> ${file}
+        echo -e "\nRUN cat ${proxy_set} >> ${proxy_file}" >> ${file}
+    fi
 }
 
 remove_trailing_spaces() {
